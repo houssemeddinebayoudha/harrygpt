@@ -5,6 +5,7 @@ from tokenizers import Tokenizer
 import torch
 import time
 
+# Setting the device to cpu cause i'm using cpu only torch and cloud run with cpu
 device = "cpu"
 
 @st.cache_resource
@@ -36,6 +37,13 @@ def generate_text(model, tokenizer, input_text, num_tokens=50, temperature=0.6):
         generated_tokens.append(next_token)
         
         yield tokenizer.decode([next_token])
+
+st.set_page_config(
+        page_title="HarryGPT",
+        page_icon="🧙‍♂️", 
+        initial_sidebar_state="auto", 
+        layout="centered"
+        )
 
 # Streamlit app layout
 st.write("""
